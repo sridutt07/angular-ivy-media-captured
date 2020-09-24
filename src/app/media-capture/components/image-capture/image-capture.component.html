@@ -1,0 +1,30 @@
+<div class="photo-capture" *ngIf="errorMessage.length === 0">
+    <ng-container *ngIf="!isCaptured">
+        <video class="display-layout" #video></video>
+    </ng-container>
+    <ng-container *ngIf="isCaptured">
+        <canvas #canvas hidden id="canvas"></canvas>
+        <img [src]="imgSrc" alt="canvas" />
+    </ng-container>
+    <div class="action-controls ">
+        <ng-container *ngIf="!isCaptured">
+            <button mat-button class="capture" (click)="capture()">
+                <mat-icon>fiber_manual_record</mat-icon>
+            </button>
+            <button mat-button (click)="flipCamera()" *ngIf="isRearCameraPresent">
+                <mat-icon>flip_camera_ios</mat-icon>
+            </button>
+        </ng-container>
+        <ng-container *ngIf="isCaptured">
+            <button mat-button (click)="confirm()">
+                <mat-icon>check_circle_outline</mat-icon>
+            </button>
+            <button mat-button (click)="retry()">
+                <mat-icon>highlight_off</mat-icon>
+            </button>
+        </ng-container>
+    </div>
+</div>
+<div *ngIf="errorMessage.length > 0" class="error-message">
+    <p>{{errorMessage}}</p>
+</div>

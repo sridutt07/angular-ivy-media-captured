@@ -1,0 +1,10 @@
+<div class="windows-case" [ngSwitch]="mediaInputData.mediaType">
+        <lib-video-capture *ngSwitchCase="mediaType.Video" [mediaInputData]="mediaInputData"
+            (mediaCaptured)="receivedMediaData($event)">
+        </lib-video-capture>
+        <lib-audio-capture *ngSwitchCase="mediaType.Audio" [mediaInputData]="mediaInputData"
+            (mediaCaptured)="receivedMediaData($event)">
+        </lib-audio-capture>
+        <lib-image-capture *ngSwitchCase="mediaType.Image" (mediaCaptured)="receivedMediaData($event)">
+        </lib-image-capture>
+</div>

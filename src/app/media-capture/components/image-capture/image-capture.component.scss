@@ -1,0 +1,46 @@
+.display-layout {
+    width: 100vw;
+    height: calc(100vh - 7em);
+    object-fit: contain;
+}
+
+button {
+    color: white;
+}
+
+img {
+    width: 100vw;
+    height: calc(100vh - 7em);
+    object-fit: contain;
+}
+
+.photo-capture {
+    display: flex;
+    flex-direction: column;
+    .action-controls {
+        display: flex;
+        justify-content: center;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        button {
+            padding: 0 3em;
+            mat-icon {
+                font-size: xx-large;
+                vertical-align: unset;
+            }
+        }
+        .capture {
+            mat-icon {
+                font-size: 5em;
+                position: relative;
+                right: 0.3em;
+            }
+        }
+    }
+}
+
+.error-message {
+    text-align: center;
+    color: white;
+}

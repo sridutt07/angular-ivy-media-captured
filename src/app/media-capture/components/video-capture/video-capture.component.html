@@ -1,0 +1,47 @@
+<div class="video-capture" *ngIf="errorMessage.length === 0">
+    <div class="action-controls" *ngIf="isCaptured">
+        <button mat-button color="white" (click)="confirm()">
+            <mat-icon>check_circle_outline</mat-icon>
+        </button>
+        <button mat-button color="white" (click)="retry()">
+            <mat-icon>highlight_off</mat-icon>
+        </button>
+    </div>
+    <div class="size-progress" *ngIf="!isCaptured">
+        <p>
+            {{ (currentVideoSize/1000000).toFixed(2)}}MB / {{mediaInputData.videoSize/1000000}}MB
+        </p>
+    </div>
+    <video #video [ngClass]="!isCaptured && facingMode === 'user'  ? 'video' : 'video-captured'"></video>
+    <div *ngIf="!isCaptured">
+        <div class="time-progress">
+            <ng-container *ngIf="isRecording">
+                {{currentTime}}/{{maxTimeDuration}}
+            </ng-container>
+        </div>
+        <div class="action-controls">
+            <ng-container *ngIf="!isRecording">
+                <button mat-button (click)="startRecording()" class="record-start">
+                    <mat-icon>fiber_manual_record</mat-icon>
+                </button>
+                <button mat-button (click)="flipCamera()" *ngIf="isRearCameraPresent">
+                    <mat-icon>flip_camera_ios</mat-icon>
+                </button>
+            </ng-container>
+            <ng-container *ngIf="isRecording">
+                <button mat-button (click)="stopRecording()" class="record-stop">
+                    <mat-icon>fiber_manual_record</mat-icon>
+                </button>
+                <button *ngIf="!isPaused && !pauseHandler" mat-button (click)="togglePausePlay()">
+                    <mat-icon>pause_circle_outline</mat-icon>
+                </button>
+                <button *ngIf="isPaused && pauseHandler" mat-button (click)="togglePausePlay()">
+                    <mat-icon>play_arrow</mat-icon>
+                </button>
+            </ng-container>
+        </div>
+    </div>
+</div>
+<div *ngIf="errorMessage.length > 0" class="error-message">
+    <p>{{errorMessage}}</p>
+</div>

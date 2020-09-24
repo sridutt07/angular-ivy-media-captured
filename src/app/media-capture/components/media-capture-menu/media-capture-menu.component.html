@@ -1,0 +1,22 @@
+<div class="log-attachment-menu">
+    <button mat-mini-fab color="primary" [ngClass]=" isDisabled ? 'disabled':'' " [matMenuTriggerFor]="menu">
+        <mat-icon>attach_file</mat-icon>
+    </button>
+
+    <mat-menu #menu>
+        <button mat-menu-item
+            (click)=" getMedia(mediaType.Image)">
+            <mat-icon>camera_alt</mat-icon>
+            <span>"image"</span>
+        </button>
+        <button mat-menu-item
+            (click)=" getMedia(mediaType.Video) ">
+            <mat-icon>videocam</mat-icon>
+            <span> "vidoe" </span>
+        </button>
+        <button mat-menu-item (click)="getMedia(mediaType.Audio)">
+            <mat-icon>mic</mat-icon>
+            <span>"audio"</span>
+        </button>
+    </mat-menu>
+</div>

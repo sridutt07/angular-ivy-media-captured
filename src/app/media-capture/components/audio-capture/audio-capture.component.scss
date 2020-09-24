@@ -1,0 +1,36 @@
+::ng-deep .mat-progress-bar .mat-progress-bar-buffer {
+    background-color: #c7c9cc !important;
+}
+
+.audio-capture {
+    display: flex;
+    position: relative;
+    top: 1.5em;
+    audio {
+        width: -webkit-fill-available;
+        outline: none;
+    }
+    .time-progress {
+        position: relative;
+        padding-right: 1em;
+        bottom: 1em;
+        width: -webkit-fill-available;
+        text-align: center;
+    }
+}
+
+button {
+    margin: 0.5em;
+}
+
+.record {
+    width: 3.5em;
+    height: 3.5em;
+    font-size: 1em;
+    bottom: 0.5em;
+}
+
+.error-message {
+    margin: 2em;
+    text-align: center;
+}

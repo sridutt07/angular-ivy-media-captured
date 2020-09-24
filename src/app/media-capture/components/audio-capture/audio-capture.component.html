@@ -1,0 +1,26 @@
+<!-- <div class="audio-case">
+    <div class="audio-capture" *ngIf="errorMessage.length === 0">
+        <button mat-mini-fab class="record" *ngIf="!isRecording" color="accent" (click)="startRecording()">
+            <mat-icon>mic</mat-icon>
+        </button>
+        <button mat-mini-fab class="record" *ngIf="isRecording" (click)="triggerStopRecording()">
+            <mat-icon>crop_square</mat-icon>
+        </button>
+        <div class="time-progress" *ngIf="!isCaptured">
+            <p>
+                {{currentTime}}
+            </p>
+            <mat-progress-bar *ngIf="isRecording" mode="determinate"
+                [value]="(progressBarTime/1000)*progressBarEqualizer">
+            </mat-progress-bar>
+        </div>
+        <audio #audio class="audio"></audio>
+        <button *ngIf="isCaptured" mat-mini-fab color="accent" (click)="confirm()">
+            <mat-icon>check</mat-icon>
+        </button>
+    </div>
+
+    <div *ngIf="errorMessage.length > 0" class="error-message">
+        <p>{{errorMessage}}</p>
+    </div>
+</div> -->

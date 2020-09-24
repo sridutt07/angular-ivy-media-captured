@@ -1,0 +1,73 @@
+.video{
+    width: 100vw;
+    height: calc(100vh - 7em);
+    object-fit: contain;
+    outline: none;
+    transform: scaleX(-1);
+}
+
+.video-captured{
+    width: 100vw;
+    height: calc(100vh - 7em);
+    object-fit: contain;
+    outline: none;
+}
+
+.video-capture {
+    display: flex;
+    flex-direction: column;
+    .size-progress {
+        text-align: center;
+        position: relative;
+        bottom: -3em;
+        p {
+            margin-top: -2em;
+            color: white;
+        }
+    }
+    .time-progress {
+        position: relative;
+        bottom: 1.5em;
+        text-align: center;
+        color: white;
+    }
+    .action-controls {
+        display: flex;
+        justify-content: center;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        button {
+            padding: 0 3em;
+            mat-icon {
+                font-size: xx-large;
+                vertical-align: unset;
+            }
+        }
+        .record-start {
+            mat-icon {
+                font-size: 5em;
+                position: relative;
+                right: 0.3em;
+            }
+        }
+
+        .record-stop {
+            color: red;
+            mat-icon {
+                font-size: 5em;
+                position: relative;
+                right: 0.3em;
+            }
+        }
+    }
+}
+
+button {
+    color: white;
+}
+
+.error-message {
+    text-align: center;
+    color: white;
+}
