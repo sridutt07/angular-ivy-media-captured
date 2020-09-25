@@ -12,7 +12,17 @@
             {{ (currentVideoSize/1000000).toFixed(2)}}MB / {{mediaInputData.videoSize/1000000}}MB
         </p>
     </div>
-    <video #video [ngClass]="!isCaptured && facingMode === 'user'  ? 'video' : 'video-captured'"></video>
+    <div class='video-rotate-buttons'>
+        <button mat-button color="white" (click)="rotateCamera('left')">
+            left
+        </button>
+        <button mat-button color="white" (click)="rotateCamera('right')">
+            right
+        </button>
+    </div>
+
+    <video #video [ngStyle]="{'transform': 'rotate(' + videoAngle + 'deg)'}" class="video-captured"></video>
+
     <div *ngIf="!isCaptured">
         <div class="time-progress">
             <ng-container *ngIf="isRecording">

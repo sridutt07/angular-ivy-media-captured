@@ -1,9 +1,12 @@
-.video{
-    width: 100vw;
-    height: calc(100vh - 7em);
-    object-fit: contain;
-    outline: none;
-    transform: scaleX(-1);
+.video-rotate-buttons{
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    button{
+        width: -webkit-fill-available;
+    }
 }
 
 .video-captured{
