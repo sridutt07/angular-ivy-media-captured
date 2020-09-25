@@ -62,7 +62,6 @@ export class VideoCaptureComponent implements AfterViewInit, OnDestroy {
 
   constraints = {
     video: {
-      facingMode: this.facingMode,
       deviceId: ""
     },
     audio: true
@@ -83,19 +82,19 @@ export class VideoCaptureComponent implements AfterViewInit, OnDestroy {
     const devices = await navigator.mediaDevices.enumerateDevices();
     const videoDevices = devices.filter(device => device.kind === "videoinput");
     debugger;
-   if (videoDevices.length > 0) {
-      videoDevices.forEach((device) => {
+    if (videoDevices.length > 0) {
+      videoDevices.forEach(device => {
         const currentCamera = new Camera();
         currentCamera.deviceId = device.deviceId;
         currentCamera.label = device.label;
         this.cameraAvalable.push(currentCamera);
-      })
+      });
       //this.isRearCameraPresent = true;
-      this.facingMode = 'environment';
+      this.selectedCamera = this.cameraAvalable[0].deviceId;
+      this.facingMode = "environment";
       this.constraints = {
         video: {
-          facingMode: this.facingMode,
-          deviceId: ''
+          deviceId: ""
         },
         audio: true
       };
@@ -132,7 +131,6 @@ export class VideoCaptureComponent implements AfterViewInit, OnDestroy {
     this.closeStream();
     this.constraints = {
       video: {
-        facingMode: this.facingMode,
         deviceId: this.selectedCamera
       },
       audio: true
@@ -256,7 +254,6 @@ export class VideoCaptureComponent implements AfterViewInit, OnDestroy {
     this.facingMode = this.facingMode === "user" ? "environment" : "user";
     this.constraints = {
       video: {
-        facingMode: this.facingMode,
         deviceId: ""
       },
       audio: true
