@@ -7,22 +7,20 @@
             <mat-icon>highlight_off</mat-icon>
         </button>
     </div>
+    <mat-form-field appearance="fill">
+        <mat-label>Select a Camera</mat-label>
+        <mat-select [(ngModel)]="selectedCamera" name="camera" (selectionChange)="cameraSelected()">
+            <mat-option *ngFor="let camera of cameraAvalable" [value]="camera.deviceId">
+                {{camera.label}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
     <div class="size-progress" *ngIf="!isCaptured">
         <p>
             {{ (currentVideoSize/1000000).toFixed(2)}}MB / {{mediaInputData.videoSize/1000000}}MB
         </p>
     </div>
-    <div class='video-rotate-buttons'>
-        <button mat-button color="white" (click)="rotateCamera('left')">
-            left
-        </button>
-        <button mat-button color="white" (click)="rotateCamera('right')">
-            right
-        </button>
-    </div>
-
     <video #video [ngStyle]="{'transform': 'rotate(' + videoAngle + 'deg)'}" class="video-captured"></video>
-
     <div *ngIf="!isCaptured">
         <div class="time-progress">
             <ng-container *ngIf="isRecording">
@@ -30,6 +28,9 @@
             </ng-container>
         </div>
         <div class="action-controls">
+            <button mat-button color="white" (click)="rotateCamera('left')">
+                left
+            </button>
             <ng-container *ngIf="!isRecording">
                 <button mat-button (click)="startRecording()" class="record-start">
                     <mat-icon>fiber_manual_record</mat-icon>
@@ -49,6 +50,9 @@
                     <mat-icon>play_arrow</mat-icon>
                 </button>
             </ng-container>
+            <button mat-button color="white" (click)="rotateCamera('right')">
+                right
+            </button>
         </div>
     </div>
 </div>

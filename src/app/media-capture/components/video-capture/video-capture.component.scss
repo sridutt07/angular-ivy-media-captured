@@ -1,13 +1,14 @@
 .video-rotate-buttons{
     display: flex;
     justify-content: center;
-    position: absolute;
+    position: fixed;
     width: 100%;
     top: 0;
     button{
         width: -webkit-fill-available;
     }
 }
+
 
 .video-captured{
     width: 100vw;

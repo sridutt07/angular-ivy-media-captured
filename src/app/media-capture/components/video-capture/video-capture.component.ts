@@ -20,6 +20,11 @@ import { mediaConstants } from "../../constants";
 
 const recordRtc = RecordRTC;
 
+class Camera {
+  deviceId: string;
+  label: string;
+}
+
 @Component({
   selector: "lib-video-capture",
   templateUrl: "./video-capture.component.html",
@@ -52,10 +57,13 @@ export class VideoCaptureComponent implements AfterViewInit, OnDestroy {
   isRearCameraPresent = false;
   facingMode = "user";
   videoAngle = 0;
+  cameraAvalable: Camera[] = [];
+  selectedCamera = "";
 
   constraints = {
     video: {
-      facingMode: this.facingMode
+      facingMode: this.facingMode,
+      deviceId: ""
     },
     audio: true
   };
@@ -74,12 +82,20 @@ export class VideoCaptureComponent implements AfterViewInit, OnDestroy {
   async ngAfterViewInit() {
     const devices = await navigator.mediaDevices.enumerateDevices();
     const videoDevices = devices.filter(device => device.kind === "videoinput");
-    if (videoDevices.length > 1) {
-      this.isRearCameraPresent = true;
-      this.facingMode = "environment";
+    debugger;
+   if (videoDevices.length > 0) {
+      videoDevices.forEach((device) => {
+        const currentCamera = new Camera();
+        currentCamera.deviceId = device.deviceId;
+        currentCamera.label = device.label;
+        this.cameraAvalable.push(currentCamera);
+      })
+      //this.isRearCameraPresent = true;
+      this.facingMode = 'environment';
       this.constraints = {
         video: {
-          facingMode: this.facingMode
+          facingMode: this.facingMode,
+          deviceId: ''
         },
         audio: true
       };
@@ -109,6 +125,19 @@ export class VideoCaptureComponent implements AfterViewInit, OnDestroy {
           this.closeStream();
         }
       });
+  }
+
+  cameraSelected() {
+    debugger;
+    this.closeStream();
+    this.constraints = {
+      video: {
+        facingMode: this.facingMode,
+        deviceId: this.selectedCamera
+      },
+      audio: true
+    };
+    this.initVideo();
   }
 
   toggleControls() {
@@ -210,8 +239,8 @@ export class VideoCaptureComponent implements AfterViewInit, OnDestroy {
     this.mediaCaptured.emit(this.mediaData);
   }
 
- rotateCamera(direction: string) {
-    if (direction === 'left') {
+  rotateCamera(direction: string) {
+    if (direction === "left") {
       this.videoAngle = this.videoAngle - 90;
     } else {
       this.videoAngle = this.videoAngle + 90;
@@ -220,16 +249,15 @@ export class VideoCaptureComponent implements AfterViewInit, OnDestroy {
     if (this.videoAngle === 360 || this.videoAngle === -360) {
       this.videoAngle = 0;
     }
-
   }
-
 
   flipCamera() {
     this.stream.getVideoTracks().forEach(track => track.stop());
     this.facingMode = this.facingMode === "user" ? "environment" : "user";
     this.constraints = {
       video: {
-        facingMode: this.facingMode
+        facingMode: this.facingMode,
+        deviceId: ""
       },
       audio: true
     };
